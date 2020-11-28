@@ -48,8 +48,8 @@ rails s -b 0.0.0.0
 exit
 ```
 - Run to stop: docker-compose down
-- Run to show volume rvm: sudo ls -a /var/lib/docker/volumes/uor_rvm/_data
-- Run to show volume nvm: sudo ls -a /var/lib/docker/volumes/uor_nvm/_data
+- Run to show volume rvm: docker volume inspect uor_rvm
+- Run to show volume nvm: docker volume inspect uor_nvm
 
 ## Ex.: New project with name UoR and Postgres 13.1
 - If you did the previous example and want to keep the same name as the project, run to clean the docker:
@@ -114,6 +114,6 @@ rails s -b 0.0.0.0
 exit
 ```
 - Run to stop: docker-compose down
-- Run to show volume rvm: sudo ls -a /var/lib/docker/volumes/uor_rvm/_data
-- Run to show volume nvm: sudo ls -a /var/lib/docker/volumes/uor_nvm/_data
-- Run to show volume postgres: sudo ls -a /var/lib/docker/volumes/uor_postgres/_data
+- Run to show volume rvm: docker volume inspect uor_rvm
+- Run to show volume nvm: docker volume inspect uor_nvm
+- Run to show volume postgres: docker volume inspect uor_postgres
