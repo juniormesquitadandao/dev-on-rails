@@ -39,8 +39,12 @@ volumes:
 - Run to show volumes: docker volume ls
 - Run to access terminal: docker-compose exec app bash
 ```shell
+# Create new project with current folder name
 rails new .
-rails s
+# Add jquery
+yarn add jquery
+# Start server and access: http://localhost:3000
+rails s            
 exit
 ```
 - Run: docker-compose down
