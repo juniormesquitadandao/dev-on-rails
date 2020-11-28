@@ -1,4 +1,4 @@
-# Ubuntu on Rails
+# Ubuntu 20.04 on Rails
 Dockerfile and docker-compose to build ubuntu image to development with rails
 
 - Install Docker: https://docs.docker.com/get-docker
