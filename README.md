@@ -1,2 +1,2 @@
-# dev-on-rails
-Dockerfile and docker-compose to development on rails
+# ubuntu-on-rails
+Dockerfile and docker-compose to build ubuntu image to development with rails
