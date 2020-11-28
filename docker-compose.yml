@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13.1
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  app:
+    build:
+      context: .
+      args:
+        RUBY_VERSION: 2.7.2
+        RAILS_VERSION: 6.0.3.4
+        NODE_VERSION: 15.3.0
+        YARN_VERSION: 1.22.5
+        AROUND_BUILD: >
+          apt install libpq-dev -y
+    container_name: app
+    working_dir: /home/l4dy
+    volumes:
+      - .:/home/l4dy
+      - /usr/local/rvm
+      - /root/.nvm
+    ports:
+      - 3000
+    tty: true
