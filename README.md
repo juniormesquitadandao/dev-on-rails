@@ -101,7 +101,7 @@ volumes:
 - Run to access terminal: docker-compose exec app bash
 ```bash
 # Create new project with current folder name
-rails new .
+rails new . --database=postgresql
 # Add jquery
 yarn add jquery
 # Start server and access: http://localhost:3000
