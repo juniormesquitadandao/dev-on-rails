@@ -19,15 +19,14 @@ services:
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.5
     container_name: app
-    working_dir: /home/UoR
+    working_dir: /home/uor/UoR
     volumes:
-      - .:/home/UoR
-      - rvm:/usr/local/rvm
-      - nvm:/root/.nvm
+      - .:/home/uor/UoR
+      - rvm:/home/uor/.rvm
+      - nvm:/home/uor/.nvm
     ports:
       - 3000:3000
     tty: true
-
 volumes:
   rvm:
   nvm:
@@ -49,6 +48,8 @@ rails s -b 0.0.0.0
 exit
 ```
 - Run to stop: docker-compose down
+- Run to show volume rvm: sudo ls -a /var/lib/docker/volumes/uor_rvm/_data
+- Run to show volume nvm: sudo ls -a /var/lib/docker/volumes/uor_nvm/_data
 
 ## Ex.: New project with name UoR and Postgres 13.1
 - If you did the previous example and want to keep the same name as the project, run to clean the docker:
@@ -60,13 +61,8 @@ docker rmi -f $(docker images -qa)
 ```
 - Create folder: UoR 
 - Create file: UoR/docker-compose.yml 
-```yml
-version: '3.8'
+```ymlversion: '3.8'
 services:
-  postgres:
-    image: postgres:13.1
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   app:
     build:
       context: .
@@ -76,22 +72,31 @@ services:
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.5
         AROUND_BUILD: >
-          apt install libpq-dev -y
+          sudo apt install libpq-dev -y
     container_name: app
-    working_dir: /home/UoR
+    working_dir: /home/uor/UoR
     volumes:
-      - .:/home/UoR
-      - rvm:/usr/local/rvm
-      - nvm:/root/.nvm
+      - .:/home/uor/UoR
+      - rvm:/home/uor/.rvm
+      - nvm:/home/uor/.nvm
     ports:
       - 3000:3000
     depends_on:
       - postgres
+    volumes_from:
+      - postgres
     tty: true
-
+  postgres:
+    image: postgres:13.1
+    environment:
+      POSTGRES_USER: uor
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres:/var/run/postgresql
 volumes:
   rvm:
   nvm:
+  postgres:
 ```
 - Run to build image: docker-compose build
 - Run to up in background: POSTGRES_PASSWORD=password docker-compose up -d
@@ -108,5 +113,7 @@ yarn add jquery
 rails s -b 0.0.0.0            
 exit
 ```
-- Run: docker-compose down
-
+- Run to stop: docker-compose down
+- Run to show volume rvm: sudo ls -a /var/lib/docker/volumes/uor_rvm/_data
+- Run to show volume nvm: sudo ls -a /var/lib/docker/volumes/uor_nvm/_data
+- Run to show volume postgres: sudo ls -a /var/lib/docker/volumes/uor_postgres/_data
