@@ -4,7 +4,7 @@ Dockerfile and docker-compose to build ubuntu image to development with rails
 - Install Docker: https://docs.docker.com/get-docker
 - Install Docker Compose: https://docs.docker.com/compose/install
 
-## Ex.: New project with name "UoR"
+## Ex.: New project with name UoR
 - Create folder: UoR 
 - Create file: UoR/docker-compose.yml 
 ```yml
@@ -50,7 +50,7 @@ exit
 ```
 - Run to stop: docker-compose down
 
-## Ex.: New project with name "UoR" and Postgres 13.1
+## Ex.: New project with name UoR and Postgres 13.1
 - If you did the previous example and want to keep the same name as the project, run to clean the docker:
 ```bash
 docker-compose down
