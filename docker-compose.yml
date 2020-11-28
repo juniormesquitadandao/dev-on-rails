@@ -14,10 +14,10 @@ services:
         YARN_VERSION: 1.22.5
         AROUND_BUILD: >
           apt install libpq-dev -y
-    container_name: app
-    working_dir: /home/l4dy
+    container_name: my_container_name
+    working_dir: /home/my_project_name
     volumes:
-      - .:/home/l4dy
+      - .:/home/my_project_name
       - /usr/local/rvm
       - /root/.nvm
     ports:
