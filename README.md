@@ -43,6 +43,8 @@ volumes:
 rails new .
 # Add jquery
 yarn add jquery
+# Create SQLite databases
+rails db:create
 # Start server and access: http://localhost:3000
 rails s -b 0.0.0.0            
 exit
@@ -61,7 +63,8 @@ docker rmi -f $(docker images -qa)
 ```
 - Create folder: UoR 
 - Create file: UoR/docker-compose.yml 
-```ymlversion: '3.8'
+```yml
+version: '3.8'
 services:
   app:
     build:
@@ -109,6 +112,8 @@ volumes:
 rails new . --database=postgresql
 # Add jquery
 yarn add jquery
+# Create Postgres databases
+rails db:create
 # Start server and access: http://localhost:3000
 rails s -b 0.0.0.0            
 exit
