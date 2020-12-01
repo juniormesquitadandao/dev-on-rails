@@ -159,6 +159,13 @@ pg_restore -d uor_development uor_development.backup -O --role=uor -U uor
 
 exit
 ```
+- Connect PGAdmin or other database client by unix socket without password: 
+```yml
+host: /home/user/path_projects/UoR/pg_sockets
+port: 5432
+role/user: uor
+database: postgres
+```
 - Run to access terminal redis: docker-compose exec redis bash
 ```bash
 # Ping redis
