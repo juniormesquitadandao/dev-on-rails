@@ -6,16 +6,15 @@ Dockerfile and docker-compose to build ubuntu image to development with rails
 
 ## Ex.: New project with name UoR
 - Create folder: UoR 
-- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
-- Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
+- Create file: UoR/docker-compose.yml 
 
 ```yml
 version: '3.8'
 services:
   app:
     build:
-      context: .
+      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
@@ -76,18 +75,17 @@ docker rmi -f $(docker images -qa)
 ```
 
 - Create folder: UoR 
-- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
-- Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
 - Add "pg_backups" to file: UoR/.gitignore
+- Create file: UoR/docker-compose.yml 
 
 ```yml
 version: '3.8'
 services:
   app:
     build:
-      context: .
+      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
@@ -203,20 +201,19 @@ exit
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
 ## Ex.: Migrate existing project with name UoR and Postgres
-- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
-- Create file: UoR/docker-compose.yml 
 - Remove file: UoR/.ruby-version
 - Remove file: UoR/.ruby-gemset
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
 - Add "pg_backups" to file: UoR/.gitignore
+- Create file: UoR/docker-compose.yml 
 
 ```yml
 version: '3.8'
 services:
   app:
     build:
-      context: .
+      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
         RUBY_VERSION: [project version]
         RAILS_VERSION: [project version]
