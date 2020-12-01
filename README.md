@@ -129,7 +129,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up --build
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
@@ -258,7 +258,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up --build
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
