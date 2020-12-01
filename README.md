@@ -180,10 +180,10 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-host: /home/user/path_projects/UoR/pg_sockets
-port: 5432
-role/user: uor
-database: postgres
+Host: /home/user/path_projects/UoR/pg_sockets
+Port: 5432
+User: uor
+Database: postgres
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
