@@ -36,16 +36,20 @@ volumes:
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
-- Run to access terminal: docker-compose exec app bash
+- Run to access terminal app: docker-compose exec app bash
 ```bash
 # Create new project with current folder name
 rails new .
+
 # Add jquery
 yarn add jquery
+
 # Create SQLite databases
 rails db:create
+
 # Start server and access: http://localhost:3000
 rails s -b 0.0.0.0            
+
 exit
 ```
 - Run to stop: docker-compose down
@@ -100,15 +104,12 @@ services:
       - pg_data:/var/lib/postgresql/data
       - ./pg_sockets:/var/run/postgresql
       - ./pg_backups:/var/backups/postgresql
-    ports:
-      - 5432:5432
   redis:
     image: redis:6.0.9
 volumes:
   rvm:
   nvm:
   pg_data:
-  pg_socket:
 ```
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up --build
 - Type to exit: CTRL+C
