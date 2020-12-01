@@ -172,7 +172,7 @@ chown uor:uor /var/backups/postgresql
 pg_dump -d uor_development -f uor_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
-pg_restore -d uor_development uor_development.backup -O --role=uor -U uor
+pg_restore -d uor_development uor_development.backup -O -c --role=uor -U uor
 
 exit
 ```
@@ -201,6 +201,15 @@ exit
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
 ## Ex.: Migrate existing project with name UoR and Postgres
+- If you want to clean the docker:
+
+```bash
+docker-compose down
+docker rm -f $(docker ps -qa)
+docker volume rm -f $(docker volume ls -q)
+docker rmi -f $(docker images -qa)
+```
+
 - Remove file: UoR/.ruby-version
 - Remove file: UoR/.ruby-gemset
 - Add "gem: -N" to file: UoR/.gemrc
@@ -224,9 +233,9 @@ services:
         YARN_VERSION: [project version]
         AROUND_BUILD: >
           sudo apt install libpq-dev -y
-    working_dir: /home/uor/UoR
+    working_dir: /home/uor/[project folder]
     volumes:
-      - .:/home/uor/UoR
+      - .:/home/uor/[project folder]
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
     ports:
@@ -297,10 +306,10 @@ adduser --disabled-password --gecos "" uor && usermod -aG sudo uor && passwd -d 
 chown uor:uor /var/backups/postgresql
 
 # Create backup and see filder "UoR/pg_backups"
-pg_dump -d uor_development -f uor_development.backup -F c -Z 9 -w -U uor
+pg_dump -d [project folder downcase and underscore]_development -f [project folder downcase and underscore]_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
-pg_restore -d uor_development uor_development.backup -O --role=uor -U uor
+pg_restore -d [project folder downcase and underscore]_development [project folder downcase and underscore]_development.backup -O -c --role=uor -U uor
 
 exit
 ```
@@ -308,7 +317,7 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-host: /home/user/path_projects/UoR/pg_sockets
+host: /home/user/path_projects/[project folder]/pg_sockets
 port: 5432
 role/user: uor
 database: postgres
