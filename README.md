@@ -78,6 +78,7 @@ docker rmi -f $(docker images -qa)
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
 - Add "pg_backups" to file: UoR/.gitignore
+- Add "uor" to file: UoR/.gitignore
 - Create file: UoR/docker-compose.yml 
 
 ```yml
@@ -117,8 +118,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TO_FIRST_UP}
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./pg_sockets:/var/run/postgresql
-      - ./pg_backups:/var/backups/postgresql
+      - ./uor/postgresql/sockets:/var/run/postgresql
+      - ./uor/postgresql/backups:/var/backups/postgresql
   redis:
     image: redis:6.0.9
 volumes:
@@ -162,13 +163,7 @@ exit
 - Run to access terminal postgresql: docker-compose exec postgresql bash
 
 ```bash
-# Create ubuntu sudo user equal postgresql user to connect postgresql without password
-adduser --disabled-password --gecos "" uor && usermod -aG sudo uor && passwd -d uor
-
-# Add ubuntu user "uor" with permissions to backups folder. Or your host user will need sudo to exclude backups
-chown uor:uor /var/backups/postgresql
-
-# Create backup and see filder "UoR/pg_backups"
+# Create backup and see filder "UoR/uor/postgresql/backups"
 pg_dump -d uor_development -f uor_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
@@ -180,11 +175,13 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-# echo "$PWD/pg_sockets"
-Host: [absolute project path]/UoR/pg_sockets
+# echo "$PWD/uor/postgresql/sockets"
+# ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
+Host: [absolute path to volume "UoR/uor/postgresql/sockets" on host]
 Port: 5432
 User: uor
-Database: postgres
+Database: uor
+Password: [POSTGRES_PASSWORD_TO_FIRST_UP]
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
@@ -300,13 +297,7 @@ exit
 - Run to access terminal postgresql: docker-compose exec postgresql bash
 
 ```bash
-# Create ubuntu sudo user equal postgresql user to connect postgresql without password
-adduser --disabled-password --gecos "" uor && usermod -aG sudo uor && passwd -d uor
-
-# Add ubuntu user "uor" with permissions to backups folder. Or your host user will need sudo to exclude backups
-chown uor:uor /var/backups/postgresql
-
-# Create backup and see filder "UoR/pg_backups"
+# Create backup and see filder "UoR/uor/postgresql/backups"
 pg_dump -d [project folder downcase and underscore]_development -f [project folder downcase and underscore]_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
@@ -318,11 +309,13 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-# echo "$PWD/pg_sockets"
-host: [absolute project folder path]/pg_sockets
-port: 5432
-role/user: uor
-database: postgres
+# echo "$PWD/uor/postgresql/sockets"
+# ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
+Host: [absolute path to volume "UoR/uor/postgresql/sockets" on host]
+Port: 5432
+User: uor
+Database: uor
+Password: [POSTGRES_PASSWORD_TO_FIRST_UP]
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
