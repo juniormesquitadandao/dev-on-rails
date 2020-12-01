@@ -180,7 +180,7 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-Host: /home/user/path_projects/UoR/pg_sockets
+Host: [absolute project path]/UoR/pg_sockets
 Port: 5432
 User: uor
 Database: postgres
@@ -317,7 +317,7 @@ exit
 - Connect PGAdmin or other database client by unix socket without password: 
 
 ```yml
-host: /home/user/path_projects/[project folder]/pg_sockets
+host: [absolute project folder path]/pg_sockets
 port: 5432
 role/user: uor
 database: postgres
