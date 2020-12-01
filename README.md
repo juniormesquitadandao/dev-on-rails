@@ -6,6 +6,7 @@ Dockerfile and docker-compose to build ubuntu image to development with rails
 
 ## Ex.: New project with name UoR
 - Create folder: UoR 
+- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
 ```yml
@@ -66,6 +67,7 @@ docker volume rm -f $(docker volume ls -q)
 docker rmi -f $(docker images -qa)
 ```
 - Create folder: UoR 
+- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
@@ -181,6 +183,7 @@ exit
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
 ## Ex.: Migrate existing project with name UoR and Postgres
+- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Remove file: UoR/.ruby-version
 - Remove file: UoR/.ruby-gemset
