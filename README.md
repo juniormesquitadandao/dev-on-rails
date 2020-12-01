@@ -6,9 +6,10 @@ Dockerfile and docker-compose to build ubuntu image to development with rails
 
 ## Ex.: New project with name UoR
 - Create folder: UoR 
-- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
+- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
+
 ```yml
 version: '3.8'
 services:
@@ -18,7 +19,10 @@ services:
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
+        BUNDLER_VERSION: 2.1.4
+        NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
+        NPM_VERSION: 6.14.9
         YARN_VERSION: 1.22.5
     container_name: app
     working_dir: /home/uor/UoR
@@ -33,12 +37,14 @@ volumes:
   rvm:
   nvm:
 ```
+
 - Run to check config: docker-compose config
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
 - Run to access terminal app: docker-compose exec app bash
+
 ```bash
 # Create new project with current folder name
 rails new .
@@ -54,24 +60,28 @@ rails s -b 0.0.0.0
 
 exit
 ```
+
 - Run to stop: docker-compose down
 - Run to show volume rvm: docker volume inspect uor_rvm
 - Run to show volume nvm: docker volume inspect uor_nvm
 
 ## Ex.: New project with name UoR and Postgres 13.1
 - If you did the previous example and want to keep the same name as the project, run to clean the docker:
+
 ```bash
 docker-compose down
 docker rm -f $(docker ps -qa)
 docker volume rm -f $(docker volume ls -q)
 docker rmi -f $(docker images -qa)
 ```
+
 - Create folder: UoR 
-- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
+- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
 - Add "pg_backups" to file: UoR/.gitignore
+
 ```yml
 version: '3.8'
 services:
@@ -82,6 +92,7 @@ services:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
         BUNDLER_VERSION: 2.1.4
+        NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
         NPM_VERSION: 6.14.9
         YARN_VERSION: 1.22.5
@@ -117,6 +128,7 @@ volumes:
   nvm:
   pg_data:
 ```
+
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up --build
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
@@ -124,6 +136,7 @@ volumes:
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
 - Run to access terminal app: docker-compose exec app bash
+
 ```bash
 # Create new project with current folder name
 rails new . --database=postgresql
@@ -147,7 +160,9 @@ rails s -b 0.0.0.0
 
 exit
 ```
+
 - Run to access terminal postgresql: docker-compose exec postgresql bash
+
 ```bash
 # Create ubuntu sudo user equal postgresql user to connect postgresql without password
 adduser --disabled-password --gecos "" uor && usermod -aG sudo uor && passwd -d uor
@@ -163,33 +178,39 @@ pg_restore -d uor_development uor_development.backup -O --role=uor -U uor
 
 exit
 ```
+
 - Connect PGAdmin or other database client by unix socket without password: 
+
 ```yml
 host: /home/user/path_projects/UoR/pg_sockets
 port: 5432
 role/user: uor
 database: postgres
 ```
+
 - Run to access terminal redis: docker-compose exec redis bash
+
 ```bash
 # Ping redis
 redis-cli PING
 
 exit
 ```
+
 - Run to stop: docker-compose down
 - Run to show volume rvm: docker volume inspect uor_rvm
 - Run to show volume nvm: docker volume inspect uor_nvm
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
 ## Ex.: Migrate existing project with name UoR and Postgres
-- Download https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile to: UoR/Dockerfile
+- Add "FROM juniormesquitadandao/ubuntu-on-rails:20.04" to file: UoR/Dockerfile
 - Create file: UoR/docker-compose.yml 
 - Remove file: UoR/.ruby-version
 - Remove file: UoR/.ruby-gemset
 - Add "gem: -N" to file: UoR/.gemrc
 - Add "pg_sockets" to file: UoR/.gitignore
 - Add "pg_backups" to file: UoR/.gitignore
+
 ```yml
 version: '3.8'
 services:
@@ -200,6 +221,7 @@ services:
         RUBY_VERSION: [project version]
         RAILS_VERSION: [project version]
         BUNDLER_VERSION: [project version]
+        NVM_VERSION: [project version]
         NODE_VERSION: [project version]
         NPM_VERSION: [project version]
         YARN_VERSION: [project version]
@@ -235,6 +257,7 @@ volumes:
   nvm:
   pg_data:
 ```
+
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up --build
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
@@ -242,6 +265,7 @@ volumes:
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
 - Run to access terminal app: docker-compose exec app bash
+
 ```bash
 # Install project gems
 bundle install
@@ -265,7 +289,9 @@ rails s -b 0.0.0.0
 
 exit
 ```
+
 - Run to access terminal postgresql: docker-compose exec postgresql bash
+
 ```bash
 # Create ubuntu sudo user equal postgresql user to connect postgresql without password
 adduser --disabled-password --gecos "" uor && usermod -aG sudo uor && passwd -d uor
@@ -281,20 +307,25 @@ pg_restore -d uor_development uor_development.backup -O --role=uor -U uor
 
 exit
 ```
+
 - Connect PGAdmin or other database client by unix socket without password: 
+
 ```yml
 host: /home/user/path_projects/UoR/pg_sockets
 port: 5432
 role/user: uor
 database: postgres
 ```
+
 - Run to access terminal redis: docker-compose exec redis bash
+
 ```bash
 # Ping redis
 redis-cli PING
 
 exit
 ```
+
 - Run to stop: docker-compose down
 - Run to show volume rvm: docker volume inspect uor_rvm
 - Run to show volume nvm: docker volume inspect uor_nvm
