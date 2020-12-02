@@ -197,7 +197,7 @@ exit
 - Run to show volume nvm: docker volume inspect uor_nvm
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
-## Ex.: Migrate existing project with name and Postgres
+## Ex.: Migrate existing project with Postgres and incompatibility between ruby and rails
 - If you want to clean the docker:
 
 ```bash
@@ -220,7 +220,7 @@ services:
       context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
         RUBY_VERSION: [project version]
-        RAILS_VERSION: [project version]
+        RAILS_VERSION: [project version] -f
         BUNDLER_VERSION: [project version]
         NVM_VERSION: [project version]
         NODE_VERSION: [project version]
