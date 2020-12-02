@@ -180,7 +180,6 @@ Host: [absolute path to volume "UoR/uor/postgresql/sockets" on host]
 Port: 5432
 User: uor
 Database: uor
-Password: [POSTGRES_PASSWORD_TO_FIRST_UP]
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
@@ -261,6 +260,8 @@ volumes:
 
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
 - Type to exit: CTRL+C
+- Remove "host" and "password" of "develpment" and "test" in: [project folder]/config/database.yml
+- Add "username: uor" to "develpment" and "test" em: [project folder]/config/database.yml
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
 - Run to show containers: docker ps
@@ -312,7 +313,6 @@ Host: [absolute path to volume "[project folder]/uor/postgresql/sockets" on host
 Port: 5432
 User: uor
 Database: uor
-Password: [POSTGRES_PASSWORD_TO_FIRST_UP]
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
