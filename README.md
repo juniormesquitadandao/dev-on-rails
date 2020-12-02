@@ -23,7 +23,6 @@ services:
         NODE_VERSION: 15.3.0
         NPM_VERSION: 6.14.9
         YARN_VERSION: 1.22.5
-    container_name: app
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
@@ -76,9 +75,6 @@ docker rmi -f $(docker images -qa)
 
 - Create folder: UoR 
 - Add "gem: -N" to file: UoR/.gemrc
-- Add "pg_sockets" to file: UoR/.gitignore
-- Add "pg_backups" to file: UoR/.gitignore
-- Add "uor" to file: UoR/.gitignore
 - Create file: UoR/docker-compose.yml 
 
 ```yml
@@ -128,7 +124,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
@@ -147,6 +143,9 @@ yarn add jquery
 # Rails auto connect in Postgresql with Unix Socket "/var/run/postgresql/.s.PGSQL.5432" and ubuntu current user "uor" without password
 rails db:create
 
+# Add redis gem
+bundler add redis
+
 # Start rails console
 rails c
 
@@ -159,15 +158,15 @@ rails s -b 0.0.0.0
 
 exit
 ```
-
+- Add "/uor" to file: UoR/.gitignore
 - Run to access terminal postgresql: docker-compose exec postgresql bash
 
 ```bash
 # Create backup and see filder "UoR/uor/postgresql/backups"
-pg_dump -d uor_development -f uor_development.backup -F c -Z 9 -w -U uor
+pg_dump -d UoR_development -f UoR_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
-pg_restore -d uor_development uor_development.backup -O -c --role=uor -U uor
+pg_restore -d UoR_development UoR_development.backup -O -c --role=uor -U uor
 
 exit
 ```
@@ -198,7 +197,7 @@ exit
 - Run to show volume nvm: docker volume inspect uor_nvm
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
-## Ex.: Migrate existing project with name UoR and Postgres
+## Ex.: Migrate existing project with name and Postgres
 - If you want to clean the docker:
 
 ```bash
@@ -208,12 +207,10 @@ docker volume rm -f $(docker volume ls -q)
 docker rmi -f $(docker images -qa)
 ```
 
-- Remove file: UoR/.ruby-version
-- Remove file: UoR/.ruby-gemset
-- Add "gem: -N" to file: UoR/.gemrc
-- Add "pg_sockets" to file: UoR/.gitignore
-- Add "pg_backups" to file: UoR/.gitignore
-- Create file: UoR/docker-compose.yml 
+- Remove file: [project folder]/.ruby-version
+- Remove file: [project folder]/.ruby-gemset
+- Add "gem: -N" to file: [project folder]/.gemrc
+- Create file: [project folder]/docker-compose.yml 
 
 ```yml
 version: '3.8'
@@ -252,8 +249,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TO_FIRST_UP}
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./pg_sockets:/var/run/postgresql
-      - ./pg_backups:/var/backups/postgresql
+      - ./uor/postgresql/sockets:/var/run/postgresql
+      - ./uor/postgresql/backups:/var/backups/postgresql
   redis:
     image: redis:[project version]
 volumes:
@@ -262,7 +259,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=password docker-compose up
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
@@ -293,15 +290,15 @@ rails s -b 0.0.0.0
 
 exit
 ```
-
+- Add "/uor" to file: [project folder]/.gitignore
 - Run to access terminal postgresql: docker-compose exec postgresql bash
 
 ```bash
 # Create backup and see filder "UoR/uor/postgresql/backups"
-pg_dump -d [project folder downcase and underscore]_development -f [project folder downcase and underscore]_development.backup -F c -Z 9 -w -U uor
+pg_dump -d [project folder]_development -f [project folder]_development.backup -F c -Z 9 -w -U uor
 
 # Restore backup
-pg_restore -d [project folder downcase and underscore]_development [project folder downcase and underscore]_development.backup -O -c --role=uor -U uor
+pg_restore -d [project folder]_development [project folder]_development.backup -O -c --role=uor -U uor
 
 exit
 ```
@@ -311,7 +308,7 @@ exit
 ```yml
 # echo "$PWD/uor/postgresql/sockets"
 # ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
-Host: [absolute path to volume "UoR/uor/postgresql/sockets" on host]
+Host: [absolute path to volume "[project folder]/uor/postgresql/sockets" on host]
 Port: 5432
 User: uor
 Database: uor
@@ -328,6 +325,6 @@ exit
 ```
 
 - Run to stop: docker-compose down
-- Run to show volume rvm: docker volume inspect uor_rvm
-- Run to show volume nvm: docker volume inspect uor_nvm
-- Run to show volume postgres: docker volume inspect uor_pg_data
+- Run to show volume rvm: docker volume inspect [project folder]_rvm
+- Run to show volume nvm: docker volume inspect [project folder]_nvm
+- Run to show volume postgres: docker volume inspect [project folder]_pg_data
