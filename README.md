@@ -5,9 +5,9 @@ Dockerfile and docker-compose to build ubuntu image to development with rails
 - Install Docker Compose: https://docs.docker.com/compose/install
 
 ## Ex.: New project with name UoR
-- Create folder: UoR 
+- Create folder: UoR
 - Add "gem: -N" to file: UoR/.gemrc
-- Create file: UoR/docker-compose.yml 
+- Create file: UoR/docker-compose.yml
 
 ```yml
 version: '3.8'
@@ -18,7 +18,7 @@ services:
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
-        BUNDLER_VERSION: 2.1.4
+        BUNDLER_VERSION: 2.1.4 --conservative
         NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
         NPM_VERSION: 6.14.9
@@ -54,7 +54,7 @@ yarn add jquery
 rails db:create
 
 # Start server and access: http://localhost:3000
-rails s -b 0.0.0.0            
+rails s -b 0.0.0.0
 
 exit
 ```
@@ -73,9 +73,9 @@ docker volume rm -f $(docker volume ls -q)
 docker rmi -f $(docker images -qa)
 ```
 
-- Create folder: UoR 
+- Create folder: UoR
 - Add "gem: -N" to file: UoR/.gemrc
-- Create file: UoR/docker-compose.yml 
+- Create file: UoR/docker-compose.yml
 
 ```yml
 version: '3.8'
@@ -86,7 +86,7 @@ services:
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
-        BUNDLER_VERSION: 2.1.4
+        BUNDLER_VERSION: 2.1.4 --conservative
         NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
         NPM_VERSION: 6.14.9
@@ -154,7 +154,7 @@ Redis.new(host: 'redis').ping
 exit
 
 # Start server and access: http://localhost:3000
-rails s -b 0.0.0.0            
+rails s -b 0.0.0.0
 
 exit
 ```
@@ -171,7 +171,7 @@ pg_restore -d UoR_development UoR_development.backup -O -c --role=uor -U uor
 exit
 ```
 
-- Connect PGAdmin or other database client by unix socket without password: 
+- Connect PGAdmin or other database client by unix socket without password:
 
 ```yml
 # echo "$PWD/uor/postgresql/sockets"
@@ -209,7 +209,7 @@ docker rmi -f $(docker images -qa)
 - Remove file: [project folder]/.ruby-version
 - Remove file: [project folder]/.ruby-gemset
 - Add "gem: -N" to file: [project folder]/.gemrc
-- Create file: [project folder]/docker-compose.yml 
+- Create file: [project folder]/docker-compose.yml
 
 ```yml
 version: '3.8'
@@ -287,7 +287,7 @@ Redis.new(host: 'redis').ping
 exit
 
 # Start server and access: http://localhost:3000
-rails s -b 0.0.0.0            
+rails s -b 0.0.0.0
 
 exit
 ```
@@ -304,7 +304,7 @@ pg_restore -d [project folder]_development [project folder]_development.backup -
 exit
 ```
 
-- Connect PGAdmin or other database client by unix socket without password: 
+- Connect PGAdmin or other database client by unix socket without password:
 
 ```yml
 # echo "$PWD/uor/postgresql/sockets"

@@ -40,7 +40,7 @@ ONBUILD RUN echo 'Visit https://rvm.io/rvm/install' && \
   rvm install $RUBY_VERSION && \
   rvm --default use $RUBY_VERSION && \
   gem install rails --version=$RAILS_VERSION -N && \
-  gem install bundler --version=$BUNDLER_VERSION --conservative -N
+  gem install bundler --version=$BUNDLER_VERSION -N
 
 ONBUILD RUN echo 'Visit https://github.com/nvm-sh/nvm#installing-and-updating' && \
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash && \
