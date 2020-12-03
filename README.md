@@ -296,7 +296,7 @@ exit
 
 ```bash
 # Create backup and see filder "UoR/uor/postgresql/backups"
-pg_dump -d [project folder]_development -f [project folder]_development.backup -F c -Z 9 -w -U uor
+pg_dump -d [project folder]_development -f [project folder]_development.backup -F c -Z 9 -U uor
 
 # Restore backup
 pg_restore -d [project folder]_development [project folder]_development.backup -O -c --role=uor -U uor
