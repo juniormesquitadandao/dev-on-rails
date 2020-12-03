@@ -127,6 +127,7 @@ volumes:
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
+- Run to enable permissions on folder "uor": sudo chown $USER:$USER -R uor
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
@@ -176,9 +177,10 @@ exit
 ```yml
 # echo "$PWD/uor/postgresql/sockets"
 # ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
-Host: [absolute path to volume "UoR/uor/postgresql/sockets" on host]
+Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
+Pasword:
 Database: uor
 ```
 
@@ -263,6 +265,7 @@ volumes:
 - Remove "host" and "password" of "develpment" and "test" in: [project folder]/config/database.yml
 - Add "username: uor" to "develpment" and "test" em: [project folder]/config/database.yml
 - Run to up in background: docker-compose up -d
+- Run to enable permissions on folder "uor": sudo chown $USER:$USER -R uor
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
@@ -309,9 +312,10 @@ exit
 ```yml
 # echo "$PWD/uor/postgresql/sockets"
 # ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
-Host: [absolute path to volume "[project folder]/uor/postgresql/sockets" on host]
+Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
+Pasword:
 Database: uor
 ```
 
