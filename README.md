@@ -118,7 +118,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=$RANDOM docker-compose up
 - Type to exit: CTRL+C
 - Run to up in background: docker-compose up -d
 - Run to enable permissions on folder "uor": sudo chown $USER:$USER -R uor
@@ -251,7 +251,7 @@ volumes:
   pg_data:
 ```
 
-- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=[your password] docker-compose up
+- Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=$RANDOM docker-compose up
 - Type to exit: CTRL+C
 - Remove "host" and "password" of "develpment" and "test" in: [project folder]/config/database.yml
 - Add "username: uor" to "develpment" and "test" em: [project folder]/config/database.yml
