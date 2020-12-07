@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-MAINTAINER <JMD> contatc@juniormesquitadandao.com
+MAINTAINER <Marcelo Junior> marcelo@juniormesquitadandao.com
 
 SHELL ["/bin/bash", "-l", "-c"]
 
