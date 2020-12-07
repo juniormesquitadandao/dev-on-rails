@@ -20,14 +20,11 @@ services:
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.10
-        AROUND_BUILD: >
-          sudo apt install -y git
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
-      - ~/.ssh:/home/uor/.ssh:ro
     ports:
       - 3000:3000
     tty: true
@@ -89,14 +86,12 @@ services:
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.10
         AROUND_BUILD: >
-          sudo apt install -y libpq-dev &&
-          sudo apt install -y git
+          sudo apt install -y libpq-dev
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
-      - ~/.ssh:/home/uor/.ssh:ro
     ports:
       - 3000:3000
     depends_on:
@@ -197,7 +192,7 @@ exit
 - Run to show volume nvm: docker volume inspect uor_nvm
 - Run to show volume postgres: docker volume inspect uor_pg_data
 
-## Ex.: Migrate existing project with Postgres and incompatibility between ruby and rails
+## Ex.: Migrate existing project with Postgres, incompatibility between ruby and rails, privated gems, and aws
 - If you want to clean the docker:
 
 ```bash
@@ -232,6 +227,7 @@ services:
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
       - ~/.ssh:/home/uor/.ssh:ro
+      - ~/.aws:/home/uor/.aws:ro
     ports:
       - 3000:3000
     depends_on:
