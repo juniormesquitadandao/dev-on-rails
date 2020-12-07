@@ -175,7 +175,7 @@ Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
 Pasword:
-Database:
+Maintenance Database: uor
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
@@ -307,7 +307,7 @@ Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
 Pasword:
-Database:
+Maintenance Database: uor
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
