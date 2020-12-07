@@ -20,6 +20,8 @@ services:
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.10
+        AROUND_BUILD: >
+          sudo apt install -y git
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
@@ -87,7 +89,8 @@ services:
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.10
         AROUND_BUILD: >
-          sudo apt install libpq-dev -y
+          sudo apt install -y libpq-dev &&
+          sudo apt install -y git
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
@@ -221,7 +224,8 @@ services:
         NODE_VERSION: [project version]
         YARN_VERSION: [project version]
         AROUND_BUILD: >
-          sudo apt install libpq-dev -y
+          sudo apt install -y libpq-dev &&
+          sudo apt install -y git
     working_dir: /home/uor/[project folder]
     volumes:
       - .:/home/uor/[project folder]
