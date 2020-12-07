@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      args:
+        RUBY_VERSION: 2.7.2
+        RAILS_VERSION: 6.0.3.4
+        NODE_VERSION: 15.3.0
+        YARN_VERSION: 1.22.5
+    working_dir: /home/uor/UoR
+    volumes:
+      - .:/home/uor/UoR
+      - rvm:/home/uor/.rvm
+      - nvm:/home/uor/.nvm
+    ports:
+      - 3000:3000
+    tty: true
+volumes:
+  rvm:
+  nvm:
+
+# docker build -t juniormesquitadandao/ubuntu-on-rails:20.04 -f Dockerfile.build .
+# docker-compose up

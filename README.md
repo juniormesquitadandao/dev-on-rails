@@ -18,11 +18,8 @@ services:
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
-        BUNDLER_VERSION: 2.1.4 --conservative
-        NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
-        NPM_VERSION: 6.14.9
-        YARN_VERSION: 1.22.5
+        YARN_VERSION: 1.22.10
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
@@ -86,11 +83,8 @@ services:
       args:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
-        BUNDLER_VERSION: 2.1.4 --conservative
-        NVM_VERSION: 0.37.2
         NODE_VERSION: 15.3.0
-        NPM_VERSION: 6.14.9
-        YARN_VERSION: 1.22.5
+        YARN_VERSION: 1.22.10
         AROUND_BUILD: >
           sudo apt install libpq-dev -y
     working_dir: /home/uor/UoR
@@ -181,7 +175,7 @@ Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
 Pasword:
-Database: uor
+Database:
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
@@ -222,10 +216,7 @@ services:
       args:
         RUBY_VERSION: [project version]
         RAILS_VERSION: [project version] -f
-        BUNDLER_VERSION: [project version]
-        NVM_VERSION: [project version]
         NODE_VERSION: [project version]
-        NPM_VERSION: [project version]
         YARN_VERSION: [project version]
         AROUND_BUILD: >
           sudo apt install libpq-dev -y
@@ -316,7 +307,7 @@ Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
 Pasword:
-Database: uor
+Database:
 ```
 
 - Run to access terminal redis: docker-compose exec redis bash
