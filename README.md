@@ -25,6 +25,7 @@ services:
       - .:/home/uor/UoR
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
+      - ~/.ssh:/home/uor/.ssh:ro
     ports:
       - 3000:3000
     tty: true
@@ -92,6 +93,7 @@ services:
       - .:/home/uor/UoR
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
+      - ~/.ssh:/home/uor/.ssh:ro
     ports:
       - 3000:3000
     depends_on:
@@ -225,6 +227,7 @@ services:
       - .:/home/uor/[project folder]
       - rvm:/home/uor/.rvm
       - nvm:/home/uor/.nvm
+      - ~/.ssh:/home/uor/.ssh:ro
     ports:
       - 3000:3000
     depends_on:
