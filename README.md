@@ -16,6 +16,7 @@ services:
     build:
       context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
+        UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
@@ -81,6 +82,7 @@ services:
     build:
       context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
+        UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
@@ -214,6 +216,7 @@ services:
     build:
       context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
       args:
+        UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: [project version]
         RAILS_VERSION: [project version] -f
         NODE_VERSION: [project version]

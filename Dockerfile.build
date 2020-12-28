@@ -6,13 +6,20 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 RUN apt update && \
   apt upgrade -y && \
-  apt install -y sudo software-properties-common curl gnupg2 jq
+  apt install -y sudo software-properties-common locales curl gnupg2 jq && \
+  sudo apt autoremove --purge
 
 RUN adduser --disabled-password --gecos "" uor && \
   usermod -aG sudo uor && \
   passwd -d uor
 
 USER uor
+
+ONBUILD ARG UBUNTU_LOCALE
+ONBUILD RUN [[ -z "$UBUNTU_LOCALE" ]] && { echo "Arg UBUNTU_LOCALE can't be blank."; exit 1; } || { echo "UBUNTU_LOCALE: $UBUNTU_LOCALE"; };
+ONBUILD RUN sudo locale-gen $UBUNTU_LOCALE && \
+  sudo update-locale LANGUAGE=$UBUNTU_LOCALE LANG=$UBUNTU_LOCALE LC_ALL=$UBUNTU_LOCALE && \
+  echo 'export $(cat /etc/default/locale | grep =)' >> ~/.bashrc
 
 ONBUILD RUN echo 'Visit https://rvm.io/rvm/install' && \
   gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
@@ -61,9 +68,11 @@ ONBUILD RUN echo 'Visit https://www.npmjs.com/package/yarn?activeTab=versions' &
 ONBUILD ARG AROUND_BUILD
 ONBUILD RUN /bin/bash -l -c "$AROUND_BUILD"
 
-ONBUILD RUN sudo apt update && sudo apt upgrade -y
+ONBUILD RUN sudo apt update && sudo apt upgrade -y && sudo apt autoremove --purge
 
 ONBUILD RUN lsb_release -a && \
+  export $(cat /etc/default/locale | grep =) && \
+  locale && \
   source ~/.rvm/scripts/rvm && \
   rvm -v && \
   ruby -v && \
