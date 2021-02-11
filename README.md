@@ -20,7 +20,7 @@ services:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
-        YARN_VERSION: 1.22.10
+        YARN_VERSION: 1.22.5
     working_dir: /home/uor/UoR
     volumes:
       - .:/home/uor/UoR
@@ -86,7 +86,7 @@ services:
         RUBY_VERSION: 2.7.2
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
-        YARN_VERSION: 1.22.10
+        YARN_VERSION: 1.22.5
         AROUND_BUILD: >
           sudo apt install -y libpq-dev
     working_dir: /home/uor/UoR
@@ -168,15 +168,57 @@ pg_restore -d UoR_development UoR_development.backup -O -c --role=uor -U uor
 exit
 ```
 
-- Connect PGAdmin or other database client by unix socket without password:
+- Connect to PGAdmin by Unix Socket without password
+- Run: echo "$PWD/uor/postgresql/sockets"
+- Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
 
 ```yml
-# echo "$PWD/uor/postgresql/sockets"
-# ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
 Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
-Pasword:
+Password:
+Maintenance Database: uor
+```
+
+- Connect to Dbeaver (Install .deb, snap raise Permission Denied) by Unix Socket without password (https://jdbc.postgresql.org/documentation/head/connect.html)
+- Run: echo "$PWD/uor/postgresql/sockets"
+- Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+
+```txt
+- Connection setting -> Server -> Host: /home/user/projects/UoR/uor/postgresql/sockets
+- Connection setting -> Server -> Port: 5432
+- Connection setting -> Server -> Database: postgres
+- Connection setting -> Authentication -> Authentication: Database Native
+- Connection setting -> Authentication -> Username: postgres
+- Connection setting -> Authentication -> Password:
+- Connection setting -> Authentication -> Save Password: true
+- Connection setting -> Edit drive settings -> Url template: jdbc:postgresql:[{database}]?socketFactory=org.newsclub.net.unix.socketfactory.PostgresqlAFUNIXSocketFactory&socketFactoryArg={host}/.s.PGSQL.5432
+- Connection setting -> Edit drive settings -> Add artifact: Groupid=no.fiken.oss.junixsocket ArtifactId=junixsocket-common
+- Connection setting -> Edit drive settings -> Add artifact: Groupid=no.fiken.oss.junixsocket ArtifactId=junixsocket-native-common
+- Connection setting -> Test connection
+- Connection setting -> PostgreSQL -> Show all databse: true
+- General -> Connection Name: l4dy
+- Ok
+```
+
+- Connect to PGAdmin or Dbeaver by tcp with password
+- Add postresql ports in docker-compose.yml
+
+```yml
+postgresql:
+  ...
+  ports:
+    - 5432:5432
+  ...
+```
+
+- Run: docker-compose restart
+
+```yml
+Host: localhost
+Port: 5432
+User: uor
+Password: [USER_PASSWORD]
 Maintenance Database: uor
 ```
 
@@ -304,15 +346,57 @@ pg_restore -d [project folder]_development [project folder]_development.backup -
 exit
 ```
 
-- Connect PGAdmin or other database client by unix socket without password:
+- Connect to PGAdmin by Unix Socket without password
+- Run: echo "$PWD/uor/postgresql/sockets"
+- Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
 
 ```yml
-# echo "$PWD/uor/postgresql/sockets"
-# ex.: "/home/user/projects/UoR/uor/postgresql/sockets"
 Host: /home/user/projects/UoR/uor/postgresql/sockets
 Port: 5432
 User: uor
-Pasword:
+Password:
+Maintenance Database: uor
+```
+
+- Connect to Dbeaver (Install .deb, snap raise Permission Denied) by Unix Socket without password (https://jdbc.postgresql.org/documentation/head/connect.html)
+- Run: echo "$PWD/uor/postgresql/sockets"
+- Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+
+```txt
+- Connection setting -> Server -> Host: /home/user/projects/UoR/uor/postgresql/sockets
+- Connection setting -> Server -> Port: 5432
+- Connection setting -> Server -> Database: postgres
+- Connection setting -> Authentication -> Authentication: Database Native
+- Connection setting -> Authentication -> Username: postgres
+- Connection setting -> Authentication -> Password:
+- Connection setting -> Authentication -> Save Password: true
+- Connection setting -> Edit drive settings -> Url template: jdbc:postgresql:[{database}]?socketFactory=org.newsclub.net.unix.socketfactory.PostgresqlAFUNIXSocketFactory&socketFactoryArg={host}/.s.PGSQL.5432
+- Connection setting -> Edit drive settings -> Add artifact: Groupid=no.fiken.oss.junixsocket ArtifactId=junixsocket-common
+- Connection setting -> Edit drive settings -> Add artifact: Groupid=no.fiken.oss.junixsocket ArtifactId=junixsocket-native-common
+- Connection setting -> Test connection
+- Connection setting -> PostgreSQL -> Show all databse: true
+- General -> Connection Name: l4dy
+- Ok
+```
+
+- Connect to PGAdmin or Dbeaver by tcp with password
+- Add postresql ports in docker-compose.yml
+
+```yml
+postgresql:
+  ...
+  ports:
+    - 5432:5432
+  ...
+```
+
+- Run: docker-compose restart
+
+```yml
+Host: localhost
+Port: 5432
+User: uor
+Password: [USER_PASSWORD]
 Maintenance Database: uor
 ```
 
