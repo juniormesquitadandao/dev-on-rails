@@ -171,6 +171,7 @@ exit
 - Connect to PGAdmin by Unix Socket without password
 - Run: echo "$PWD/uor/postgresql/sockets"
 - Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+- Config connection
 
 ```yml
 Host: /home/user/projects/UoR/uor/postgresql/sockets
@@ -183,6 +184,7 @@ Maintenance Database: uor
 - Connect to Dbeaver (Install .deb, snap raise Permission Denied) by Unix Socket without password (https://jdbc.postgresql.org/documentation/head/connect.html)
 - Run: echo "$PWD/uor/postgresql/sockets"
 - Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+- Config connection
 
 ```txt
 - Connection setting -> Server -> Host: /home/user/projects/UoR/uor/postgresql/sockets
@@ -213,6 +215,7 @@ postgresql:
 ```
 
 - Run: docker-compose restart
+- Config connection
 
 ```yml
 Host: localhost
@@ -349,6 +352,7 @@ exit
 - Connect to PGAdmin by Unix Socket without password
 - Run: echo "$PWD/uor/postgresql/sockets"
 - Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+- Config connection
 
 ```yml
 Host: /home/user/projects/UoR/uor/postgresql/sockets
@@ -361,6 +365,7 @@ Maintenance Database: uor
 - Connect to Dbeaver (Install .deb, snap raise Permission Denied) by Unix Socket without password (https://jdbc.postgresql.org/documentation/head/connect.html)
 - Run: echo "$PWD/uor/postgresql/sockets"
 - Example path generated "/home/user/projects/UoR/uor/postgresql/sockets"
+- Config connection
 
 ```txt
 - Connection setting -> Server -> Host: /home/user/projects/UoR/uor/postgresql/sockets
@@ -391,6 +396,7 @@ postgresql:
 ```
 
 - Run: docker-compose restart
+- Config connection
 
 ```yml
 Host: localhost
