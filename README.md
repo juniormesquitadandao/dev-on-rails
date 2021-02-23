@@ -28,6 +28,8 @@ services:
       - nvm:/home/uor/.nvm
     ports:
       - 3000:3000
+    environment:
+      BINDING: 0.0.0.0
     tty: true
 volumes:
   rvm:
@@ -51,8 +53,8 @@ yarn add jquery
 # Create SQLite databases
 rails db:create
 
-# Start server and access: http://localhost:3000
-rails s -b 0.0.0.0
+# Start server and access in browser: http://localhost:3000
+rails s
 
 exit
 ```
@@ -96,6 +98,8 @@ services:
       - nvm:/home/uor/.nvm
     ports:
       - 3000:3000
+    environment:
+      BINDING: 0.0.0.0
     depends_on:
       - postgresql
       - redis
@@ -150,8 +154,8 @@ rails c
 Redis.new(host: 'redis').ping
 exit
 
-# Start server and access: http://localhost:3000
-rails s -b 0.0.0.0
+# Start server and access in browser: http://localhost:3000
+rails s
 
 exit
 ```
@@ -278,6 +282,8 @@ services:
       - ~/.aws:/home/uor/.aws:ro
     ports:
       - 3000:3000
+    environment:
+      BINDING: 0.0.0.0
     depends_on:
       - postgresql
       - redis
@@ -331,8 +337,8 @@ rails c
 Redis.new(host: 'redis').ping
 exit
 
-# Start server and access: http://localhost:3000
-rails s -b 0.0.0.0
+# Start server and access in browser: http://localhost:3000
+rails s
 
 exit
 ```
