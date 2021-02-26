@@ -19,6 +19,12 @@ services:
     environment:
       BINDING: 0.0.0.0
     tty: true
+    # command: |
+    #   bash -lc '
+    #     rvm -v
+    #     echo "nvm: `nvm -v`"
+    #     irb
+    #   '
 volumes:
   rvm:
   nvm:

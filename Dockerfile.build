@@ -54,6 +54,8 @@ ONBUILD RUN echo 'Visit https://www.npmjs.com/package/node?activeTab=versions' &
   export NVM_DIR="$HOME/.nvm" && \
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+  echo 'source ~/.nvm/nvm.sh' >> ~/.bashrc && \
+  echo 'source ~/.nvm/nvm.sh' >> ~/.bash_profile && \
   nvm install $NODE_VERSION --latest-npm && \
   nvm use $NODE_VERSION
 
@@ -66,7 +68,7 @@ ONBUILD RUN echo 'Visit https://www.npmjs.com/package/yarn?activeTab=versions' &
   npm install yarn@$YARN_VERSION -g
 
 ONBUILD ARG AROUND_BUILD
-ONBUILD RUN /bin/bash -l -c "sudo apt update && $AROUND_BUILD"
+ONBUILD RUN /bin/bash -l -c "$AROUND_BUILD"
 
 ONBUILD RUN sudo apt update && sudo apt upgrade -y && sudo apt autoremove --purge
 
@@ -79,9 +81,7 @@ ONBUILD RUN lsb_release -a && \
   rails -v && \
   bundler -v && \
   echo "gem `gem -v`" && \
-  export NVM_DIR="$HOME/.nvm" && \
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+  source ~/.nvm/nvm.sh && \
   echo "nvm `nvm --version`" && \
   echo "node `node -v`" && \
   echo "npm `npm -v`" && \

@@ -31,6 +31,15 @@ services:
     environment:
       BINDING: 0.0.0.0
     tty: true
+    # command: |
+    #   bash -lc '
+    #     rvm -v
+    #     echo "nvm: `nvm -v`"
+    #     bunble install
+    #     rails s
+    #     sidekiq
+    #     irb
+    #   '
 volumes:
   rvm:
   nvm:
@@ -41,6 +50,8 @@ volumes:
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
+- Run to show bundle: docker-compose run --rm app bash -lc 'bundle -v'
+- Run to show node: docker-compose run --rm app bash -lc 'node -v'
 - Run to access terminal app: docker-compose exec app bash
 
 ```bash
@@ -90,6 +101,7 @@ services:
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.5
         AROUND_BUILD: >
+          sudo apt update &&
           sudo apt install -y libpq-dev
     working_dir: /home/uor/UoR
     volumes:
@@ -106,6 +118,15 @@ services:
     volumes_from:
       - postgresql
     tty: true
+    # command: |
+    #   bash -lc '
+    #     rvm -v
+    #     echo "nvm: `nvm -v`"
+    #     bunble install
+    #     rails s
+    #     sidekiq
+    #     irb
+    #   '
   postgresql:
     image: postgres:13.1
     working_dir: /var/backups/postgresql
@@ -131,6 +152,8 @@ volumes:
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
+- Run to show bundle: docker-compose run --rm app bash -lc 'bundle -v'
+- Run to show node: docker-compose run --rm app bash -lc 'node -v'
 - Run to access terminal app: docker-compose exec app bash
 
 ```bash
@@ -271,6 +294,7 @@ services:
         NODE_VERSION: [project version]
         YARN_VERSION: [project version]
         AROUND_BUILD: >
+          sudo apt update &&
           sudo apt install -y libpq-dev &&
           sudo apt install -y git
     working_dir: /home/uor/[project folder]
@@ -290,6 +314,15 @@ services:
     volumes_from:
       - postgresql
     tty: true
+    # command: |
+    #   bash -lc '
+    #     rvm -v
+    #     echo "nvm: `nvm -v`"
+    #     bunble install
+    #     rails s
+    #     sidekiq
+    #     irb
+    #   '
   postgresql:
     image: postgres:[project version]
     working_dir: /var/backups/postgresql
@@ -317,6 +350,8 @@ volumes:
 - Run to show images: docker images
 - Run to show containers: docker ps
 - Run to show volumes: docker volume ls
+- Run to show bundle: docker-compose run --rm app bash -lc 'bundle -v'
+- Run to show node: docker-compose run --rm app bash -lc 'node -v'
 - Run to access terminal app: docker-compose exec app bash
 
 ```bash
