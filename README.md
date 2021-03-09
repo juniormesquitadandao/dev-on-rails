@@ -46,6 +46,7 @@ volumes:
 ```
 
 - Run to check config: docker-compose config
+- Run to up in background: docker-compose build
 - Run to up in background: docker-compose up -d
 - Run to show images: docker images
 - Run to show containers: docker ps
@@ -147,6 +148,7 @@ volumes:
 
 - Run to build and up: POSTGRES_PASSWORD_TO_FIRST_UP=$RANDOM docker-compose up
 - Type to exit: CTRL+C
+- Run to up in background: docker-compose build
 - Run to up in background: docker-compose up -d
 - Run to enable permissions on folder "uor": sudo chown $USER:$USER -R uor
 - Run to show images: docker images
@@ -345,6 +347,7 @@ volumes:
 - Type to exit: CTRL+C
 - Remove "host" and "password" of "develpment" and "test" in: [project folder]/config/database.yml
 - Add "username: uor" to "develpment" and "test" em: [project folder]/config/database.yml
+- Run to up in background: docker-compose build
 - Run to up in background: docker-compose up -d
 - Run to enable permissions on folder "uor": sudo chown $USER:$USER -R uor
 - Run to show images: docker images
