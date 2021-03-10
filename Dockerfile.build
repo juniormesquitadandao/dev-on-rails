@@ -46,25 +46,24 @@ ONBUILD RUN echo 'Visit https://rubygems.org/gems/rails/versions' && \
   gem install rails --version=$RAILS_VERSION -N
 
 ONBUILD RUN echo 'Visit https://github.com/nvm-sh/nvm#installing-and-updating' && \
-  curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl https://api.github.com/repos/nvm-sh/nvm/releases/latest -s | jq -j .tag_name)/install.sh" | bash
-
-ONBUILD ARG NODE_VERSION
-ONBUILD RUN [[ -z "$NODE_VERSION" ]] && { echo "Arg NODE_VERSION can't be blank."; exit 1; } || { echo "NODE_VERSION: $NODE_VERSION"; };
-ONBUILD RUN echo 'Visit https://www.npmjs.com/package/node?activeTab=versions' && \
+  curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$(curl https://api.github.com/repos/nvm-sh/nvm/releases/latest -s | jq -j .tag_name)/install.sh" | bash && \
   export NVM_DIR="$HOME/.nvm" && \
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
   echo 'source ~/.nvm/nvm.sh' >> ~/.bashrc && \
-  echo 'source ~/.nvm/nvm.sh' >> ~/.bash_profile && \
+  echo 'source ~/.nvm/nvm.sh' >> ~/.bash_profile
+
+ONBUILD ARG NODE_VERSION
+ONBUILD RUN [[ -z "$NODE_VERSION" ]] && { echo "Arg NODE_VERSION can't be blank."; exit 1; } || { echo "NODE_VERSION: $NODE_VERSION"; };
+ONBUILD RUN echo 'Visit https://www.npmjs.com/package/node?activeTab=versions' && \
+  source ~/.nvm/nvm.sh && \
   nvm install $NODE_VERSION --latest-npm && \
   nvm use $NODE_VERSION
 
 ONBUILD ARG YARN_VERSION
 ONBUILD RUN [[ -z "$YARN_VERSION" ]] && { echo "Arg YARN_VERSION can't be blank."; exit 1; } || { echo "YARN_VERSION: $YARN_VERSION"; };
 ONBUILD RUN echo 'Visit https://www.npmjs.com/package/yarn?activeTab=versions' && \
-  export NVM_DIR="$HOME/.nvm" && \
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+  source ~/.nvm/nvm.sh && \
   npm install yarn@$YARN_VERSION -g
 
 ONBUILD ARG AROUND_BUILD
