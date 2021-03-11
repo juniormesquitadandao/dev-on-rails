@@ -7,7 +7,8 @@ SHELL ["/bin/bash", "-l", "-c"]
 RUN apt update && \
   apt upgrade -y && \
   apt install -y sudo software-properties-common locales curl gnupg2 jq python2 && \
-  sudo apt autoremove --purge
+  sudo apt autoremove --purge && \
+  sudo apt autoclean
 
 RUN adduser --disabled-password --gecos "" uor && \
   usermod -aG sudo uor && \
@@ -69,7 +70,7 @@ ONBUILD RUN echo 'Visit https://www.npmjs.com/package/yarn?activeTab=versions' &
 ONBUILD ARG AROUND_BUILD
 ONBUILD RUN /bin/bash -l -c "$AROUND_BUILD"
 
-ONBUILD RUN sudo apt update && sudo apt upgrade -y && sudo apt autoremove --purge
+ONBUILD RUN sudo apt update && sudo apt upgrade -y && sudo apt autoremove --purge && sudo apt autoclean
 
 ONBUILD RUN lsb_release -a && \
   export $(cat /etc/default/locale | grep =) && \
