@@ -52,7 +52,7 @@ ONBUILD RUN echo 'Visit https://github.com/nvm-sh/nvm#installing-and-updating' &
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
   echo 'source ~/.nvm/nvm.sh' >> ~/.bashrc && \
-  echo 'source ~/.nvm/nvm.sh' >> ~/.bash_profile
+  echo '[[ -s "$HOME/.nvm/nvm.sh" ]] && source "$HOME/.nvm/nvm.sh"' >> ~/.bash_profile
 
 ONBUILD ARG NODE_VERSION
 ONBUILD RUN [[ -z "$NODE_VERSION" ]] && { echo "Arg NODE_VERSION can't be blank."; exit 1; } || { echo "NODE_VERSION: $NODE_VERSION"; };
