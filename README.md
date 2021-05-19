@@ -14,7 +14,7 @@ version: '3.8'
 services:
   app:
     build:
-      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
+      context: https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile
       args:
         UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: 2.7.2
@@ -94,7 +94,7 @@ version: '3.8'
 services:
   app:
     build:
-      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
+      context: https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile
       args:
         UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: 2.7.2
@@ -288,7 +288,7 @@ version: '3.8'
 services:
   app:
     build:
-      context: https://github.com/juniormesquitadandao/ubuntu-on-rails.git#20.04
+      context: https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile
       args:
         UBUNTU_LOCALE: en_US.UTF-8
         RUBY_VERSION: [project version]
