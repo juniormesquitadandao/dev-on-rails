@@ -30,4 +30,5 @@ volumes:
   nvm:
 
 # docker build -t juniormesquitadandao/ubuntu-on-rails:20.04 -f Dockerfile.build .
+# docker run --rm -it juniormesquitadandao/ubuntu-on-rails:20.04 bash
 # docker-compose up

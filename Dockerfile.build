@@ -6,7 +6,8 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 RUN apt update && \
   apt upgrade -y && \
-  apt install -y sudo software-properties-common locales curl gnupg2 jq python2 && \
+  apt install -y sudo software-properties-common locales apt-utils curl gnupg2 jq python2 vim && \
+  sudo update-alternatives --config editor && \
   sudo apt autoremove --purge && \
   sudo apt autoclean
 
