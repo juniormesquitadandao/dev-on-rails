@@ -17,7 +17,7 @@ services:
       context: https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile
       args:
         UBUNTU_LOCALE: en_US.UTF-8
-        RUBY_VERSION: 2.7.2
+        RUBY_VERSION: 3.0.1
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.5
@@ -97,7 +97,7 @@ services:
       context: https://raw.githubusercontent.com/juniormesquitadandao/ubuntu-on-rails/20.04/Dockerfile
       args:
         UBUNTU_LOCALE: en_US.UTF-8
-        RUBY_VERSION: 2.7.2
+        RUBY_VERSION: 3.0.1
         RAILS_VERSION: 6.0.3.4
         NODE_VERSION: 15.3.0
         YARN_VERSION: 1.22.5

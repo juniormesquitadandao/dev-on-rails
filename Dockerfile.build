@@ -37,7 +37,7 @@ ONBUILD ARG RUBY_VERSION
 ONBUILD RUN [[ -z "$RUBY_VERSION" ]] && { echo "Arg RUBY_VERSION can't be blank."; exit 1; } || { echo "RUBY_VERSION: $RUBY_VERSION"; };
 ONBUILD RUN echo 'Visit https://www.ruby-lang.org/en/downloads/releases' && \
   source ~/.rvm/scripts/rvm && \
-  rvm install $RUBY_VERSION --autolibs=packages && \
+  rvm install $RUBY_VERSION && \
   rvm --default use $RUBY_VERSION && \
   gem update bundler
 
